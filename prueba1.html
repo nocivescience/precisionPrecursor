@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .container{
+        width: 600px;
+        height: 500px;
+        border-radius: 6px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
+</style>
+<body>
+    <div class="container" id="container"></div>
+    <script>
+        let frame=0;
+        const container = document.getElementById('container');
+        const figura1 = document.createElement('img');
+        const figura2 = document.createElement('img');
+        figura1.src = './figura1.png';
+        figura2.src = './figura2.png';
+        [figura1,figura2].forEach((figura,i) => {
+            figura.style.position = 'absolute';
+            figura.style.width = '100px';
+            figura.style.height = '100px';
+            figura.style.top = '80px';
+            figura.style.left = '80px';
+            setInterval(() => {
+                frame+=50;
+                let Figura=figura1;
+                console.log(frame);
+                if(frame%100){
+                    Figura=Figura===figura1?figura2:figura1;
+                    container.appendChild(Figura);
+                }
+            }, 100);
+        });
+    </script>
+</body>
+</html>
