@@ -109,8 +109,21 @@ const debugMode = false;
 let balls = [];
 let ballElements = [];
 let holeElements = [];
+let tiempo=12;
 
 resetGame();
+
+function relojJuego() {
+  setInterval(function(){
+    tiempo-=1;
+    if(tiempo==0){
+      alert("Se acabo el tiempo");
+      location.reload();
+    }
+    console.log(tiempo);
+  },1000);
+};
+relojJuego();
 
 // Draw balls for the first time
 balls.forEach(({ x, y }) => {
