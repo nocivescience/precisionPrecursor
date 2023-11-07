@@ -30,11 +30,11 @@
         figura1.src = './mono1.png';
         figura2.src = './mono2.png';
         [figura1, figura2].forEach((figura, i) => {
-            figura.style.position = 'absolute';
+            figura.style.position = 'relative';
             figura.style.width = '100px';
             figura.style.height = '100px';
             figura.style.userSelect = 'none';
-            figura.style.top = `${playerMove.y}px`;
+            figura.style.top = `300px`;
             figura.style.left = `${playerMove.x}px`;
             container.appendChild(figura);
             figura.style.display = 'none'; // Ocultar ambas figuras al principio
@@ -63,8 +63,8 @@
         document.addEventListener('keydown', (e) => {
             switch (e.key) {
                 case 'a':
-                    if (playerMove.x < 0) {
-                        playerMove.x =0
+                    if (playerMove.x < 10) {
+                        playerMove.x =10
                     }
                     playerMove.dx = -10;
                     movePlayer();
@@ -74,20 +74,6 @@
                         playerMove.x =500
                     }
                     playerMove.dx = 10;
-                    movePlayer();
-                    break;
-                case 'w':
-                    if (playerMove.y > 500) {
-                        playerMove.y =500
-                    }
-                    playerMove.dy = -10;
-                    movePlayer();
-                    break;
-                case 's':
-                    if (playerMove.y < 0) {
-                        playerMove.y =0
-                    }
-                    playerMove.dy = 10;
                     movePlayer();
                     break;
             }
@@ -101,21 +87,14 @@
                 case 'd':
                     playerMove.dx = 0;
                     break;
-                case 'w':
-                    playerMove.dy = 0;
-                    break;
-                case 's':
-                    playerMove.dy = 0;
-                    break;
             }
         })
 
         function movePlayer() {
             playerMove.x += playerMove.dx;
             playerMove.y += playerMove.dy;
-            figura1.style.top = `${playerMove.y}px`;
+            figura1.style.position = 'relative';
             figura1.style.left = `${playerMove.x}px`;
-            figura2.style.top = `${playerMove.y}px`;
             figura2.style.left = `${playerMove.x}px`;
             setTimeout(movePlayer, 100);
             alternateFigures();
