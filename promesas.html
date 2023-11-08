@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+
+</style>
+
+<body>
+    <div class="container" id="container">
+
+    </div>
+    <script>
+        const container = document.getElementById('container');
+        function fetchData(url) {
+            return fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Error al realizar la petición' + url)
+                    }
+                    return response.json()
+                })
+        }
+        const urls = [
+            'https://jsonplaceholder.typicode.com/users',
+            'https://jsonplaceholder.typicode.com/posts',
+            'https://jsonplaceholder.typicode.com/albums'
+        ]
+        const promises = urls.map(url => fetchData(url));
+        Promise.all(promises)
+            .then(
+                data => {
+                    console.log(`los datos son: ${JSON.stringify(data,null,2)}`)
+                }
+            )
+            .catch(
+                error => {
+                    console.log(`Error: ${error}`)
+                }
+            )
+    </script>
+</body>
+
+</html>

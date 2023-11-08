@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+
+</style>
+<body>
+    <div id="container"></div>
+    <script>
+        function generateRandomNumber(min, max) {
+            return Math.floor(Math.random() * (max - min)) + min;
+        }
+        function doubleNumber(number) {
+            return new Promise((resolve)=>{
+                setTimeout(()=>{
+                    resolve(number*2)
+                },generateRandomNumber(1,1000))
+            
+            })
+        }
+        function squareNumber(number) {
+            return new Promise((resolve)=>{
+                setTimeout(()=>{
+                    resolve(number*number)
+                },1000)
+            })
+        }
+        const randomNumbers= Array.from({length:5},()=>generateRandomNumber(1,10))
+        const doublePromises = randomNumbers.map((number)=> doubleNumber(number));
+        const squarePromises = randomNumbers.map((number)=> squareNumber(number));
+        Promise.all([...doublePromises,...squarePromises])
+        .then((results)=>{
+            console.log('Números aleatorios:',randomNumbers)
+            console.log('Número dobles:',results.slice(0,5))
+            console.log('Número cuadrados:',results.slice(5,10))
+        })
+        .catch((error)=>{
+            console.log(`Error: ${error}`)
+        })
+    </script>
+</body>
+</html>
